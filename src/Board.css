@@ -1,3 +1,14 @@
 .Board {
-  margin: 0 auto;
+  margin: auto;
+}
+
+.table {
+    margin: auto;
+    margin-top: 5rem;
+    border: 2px solid black;
+}
+
+.win {
+    color: white;
+    font-size: 5rem;
 }

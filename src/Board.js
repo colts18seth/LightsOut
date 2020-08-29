@@ -53,10 +53,18 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     }
 
     function hasWon() {
-        // TODO: check the board in state to determine whether the player has won.
+        let isWinner = false;
+        //* TODO: check the board in state to determine whether the player has won.
+        let check = board.filter(r => (
+            r.includes(true)
+        ))
+        if (!check[0]) {
+            isWinner = true
+        }
+        return isWinner
     }
 
-    function flipCellsAround(coord) {
+    function flipCellsAroundMe(coord) {
         setBoard(oldBoard => {
             const [y, x] = coord.split("-").map(Number);
 
@@ -64,39 +72,54 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
                 // if this coord is actually on board, flip it
 
                 if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-                    boardCopy[y][x] = !boardCopy[y][x];
+                    boardCopy[x][y] = !boardCopy[x][y];
                 }
             };
 
-            // TODO: Make a (deep) copy of the oldBoard
+            //* TODO: Make a (deep) copy of the oldBoard
+            let oldBoardCopy = JSON.parse(JSON.stringify(oldBoard))
 
-            // TODO: in the copy, flip this cell and the cells around it
+            //* TODO: in the copy, flip this cell and the cells around it
+            flipCell(x, y, oldBoardCopy);
+            flipCell((x + 1), y, oldBoardCopy);
+            flipCell((x - 1), y, oldBoardCopy);
+            flipCell(x, (y + 1), oldBoardCopy);
+            flipCell(x, (y - 1), oldBoardCopy);
 
-            // TODO: return the copy
+            //* TODO: return the copy
+            return oldBoardCopy;
         });
     }
 
     // if the game is won, just show a winning msg & render nothing else
-    // TODO
+    //* TODO
+    if (hasWon()) {
+        return (
+            <h1 className="win">You WIN!!!</h1>
+        )
+    }
 
     // make table board
-    // TODO
+    //* TODO
+    let rows = board.map((r, idx1) => (
+        < tr key={idx1} >
+            {r.map((c, idx2) => {
+                if (c === true) {
+                    return <Cell key={idx1 + "-" + idx2} isLit flipCellsAroundMe={evt => flipCellsAroundMe(idx1 + "-" + idx2)} />
+                } else {
+                    return <Cell key={idx1 + "-" + idx2} flipCellsAroundMe={evt => flipCellsAroundMe(idx1 + "-" + idx2)} />
+                }
+            })}
+        </tr >
+    ))
 
-    board.map(row => {
-        row.map(cell => {
-            if (cell === true) {
-
-            } else {
-
-            }
-        })
-    })
 
 
     return (
-
-        < table >
-
+        < table className="table" >
+            <tbody>
+                {rows}
+            </tbody>
         </table >
     )
 }

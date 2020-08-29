@@ -28,46 +28,49 @@ import "./Board.css";
  **/
 
 function Board({ nrows, ncols, chanceLightStartsOn }) {
-  const [board, setBoard] = useState(createBoard());
+    const [board, setBoard] = useState(createBoard());
 
-  /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
-  function createBoard() {
-    let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
-    return initialBoard;
-  }
+    /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
+    function createBoard() {
+        let initialBoard = [];
+        // TODO: create array-of-arrays of true/false values
+        return initialBoard;
+    }
 
-  function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
-  }
+    function hasWon() {
+        // TODO: check the board in state to determine whether the player has won.
+    }
 
-  function flipCellsAround(coord) {
-    setBoard(oldBoard => {
-      const [y, x] = coord.split("-").map(Number);
+    function flipCellsAround(coord) {
+        setBoard(oldBoard => {
+            const [y, x] = coord.split("-").map(Number);
 
-      const flipCell = (y, x, boardCopy) => {
-        // if this coord is actually on board, flip it
+            const flipCell = (y, x, boardCopy) => {
+                // if this coord is actually on board, flip it
 
-        if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-          boardCopy[y][x] = !boardCopy[y][x];
-        }
-      };
+                if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+                    boardCopy[y][x] = !boardCopy[y][x];
+                }
+            };
 
-      // TODO: Make a (deep) copy of the oldBoard
+            // TODO: Make a (deep) copy of the oldBoard
 
-      // TODO: in the copy, flip this cell and the cells around it
+            // TODO: in the copy, flip this cell and the cells around it
 
-      // TODO: return the copy
-    });
-  }
+            // TODO: return the copy
+        });
+    }
 
-  // if the game is won, just show a winning msg & render nothing else
+    // if the game is won, just show a winning msg & render nothing else
+    // TODO
 
-  // TODO
+    // make table board
+    // TODO
+    return (
+        <table>
 
-  // make table board
-
-  // TODO
+        </table>
+    )
 }
 
 export default Board;

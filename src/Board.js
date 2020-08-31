@@ -34,7 +34,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     function createBoard() {
         let initialBoard = [];
         const randVal = () => {
-            //* TODO: create array-of-arrays of true/false values
             const randNum = Math.random()
             if (randNum >= chanceLightStartsOn) {
                 return true;
@@ -54,7 +53,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
     function hasWon() {
         let isWinner = false;
-        //* TODO: check the board in state to determine whether the player has won.
         let check = board.filter(r => (
             r.includes(true)
         ))
@@ -76,23 +74,19 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
                 }
             };
 
-            //* TODO: Make a (deep) copy of the oldBoard
             let oldBoardCopy = JSON.parse(JSON.stringify(oldBoard))
 
-            //* TODO: in the copy, flip this cell and the cells around it
             flipCell(x, y, oldBoardCopy);
             flipCell((x + 1), y, oldBoardCopy);
             flipCell((x - 1), y, oldBoardCopy);
             flipCell(x, (y + 1), oldBoardCopy);
             flipCell(x, (y - 1), oldBoardCopy);
 
-            //* TODO: return the copy
             return oldBoardCopy;
         });
     }
 
     // if the game is won, just show a winning msg & render nothing else
-    //* TODO
     if (hasWon()) {
         return (
             <h1 className="win">You WIN!!!</h1>
@@ -100,7 +94,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     }
 
     // make table board
-    //* TODO
     let rows = board.map((r, idx1) => (
         < tr key={idx1} >
             {r.map((c, idx2) => {
@@ -112,8 +105,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
             })}
         </tr >
     ))
-
-
 
     return (
         < table className="table" >
